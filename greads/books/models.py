@@ -16,6 +16,7 @@ class Book(models.Model):
                                       default='pic_path_for_default_pic')
     publisher = models.CharField(max_length=100)
     no_of_pages = models.IntegerField()
+    summary = models.TextField()
 
 
 class Author(models.Model):
@@ -23,7 +24,7 @@ class Author(models.Model):
     website = models.CharField(blank=True)
     twitter_id = models.CharField(blank=True)
     member_since = models.DateField()
-    story = models.TextField()
+    about = models.TextField()
 
 
 class BookAuthor(models.Model):
