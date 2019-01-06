@@ -1,6 +1,6 @@
 from django.db import models
 
-
+'''
 # Create your models here.
 class User(models.Model):
     email = models.EmailField(primary_key=True)
@@ -27,3 +27,4 @@ class Notification(models.Model):
     end_date = models.DateField()
     due_date = models.DateField()
     pending = models.BooleanField()
+'''

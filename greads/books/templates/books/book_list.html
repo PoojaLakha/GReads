@@ -1,0 +1,16 @@
+{% if book_list %}
+    <ul>
+    {% for book in book_list %}
+        <li>
+        	<a href="{% url 'books:book-detail' pk=book.isbn %}"">{{ book.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No books are added yet.</p>
+{% endif %}
+
+<form action="{% url 'books:book_create' %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Add Book">
+</form>
