@@ -8,7 +8,8 @@
   {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'books:index' %}">Home</a></li>
-          <li><a href="{% url 'books:books'%}">All books</a></li>
+          <li><a href="{% url 'books:books' %}">All books</a></li>
+          <li><a href="{% url 'users:view_profile' %}">Profile</a></li>
         </ul>
      {% endblock %}
   <p><a href="{% url 'logout' %}">logout</a></p>

@@ -1,3 +1,4 @@
+<p><a href="{% url 'books:index' %}">Home</a></p>
 {% if book_list %}
     <ul>
     {% for book in book_list %}
@@ -14,3 +15,5 @@
   {% csrf_token %}
   <input type="submit" value="Add Book">
 </form>
+
+<p><a href="{% url 'logout' %}">logout</a></p>
