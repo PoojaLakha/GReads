@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Book Details</h1>
+
+<p>{{ book.title }}</p>
+
+<p>{{ book.summary }} </p>
+
+<form action="{% url 'books:book_delete_confirm' pk=book.isbn %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Delete">
+</form>
+<p>
+{% endblock%}
