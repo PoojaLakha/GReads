@@ -6,8 +6,9 @@
 
 <p>Username       : {{ user }}</p>
 <p>First Name     : {{ user.first_name }}</p>
-<p>Last Name      : {{ user.last_name }}</p>
+<p>Last Name Name : {{ user.last_name }}</p>
 <p>Email          : {{ user.email}}</p>
+<p>About me       : {{user.customuser.about_me}}</p>
 
 <form action="{% url 'users:edit_profile' %}" method="GET">
   {% csrf_token %}

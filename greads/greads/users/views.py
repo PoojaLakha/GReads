@@ -9,6 +9,18 @@ from django.contrib.auth.models import User
 
 
 # Create your views here.
+
+
+'''class UserDetail(generic.DetailView):
+    model = CustomUser
+
+
+class UserEdit(UpdateView):
+    model = CustomUser
+    fields = '__all__'
+'''
+
+
 def view_profile(request, pk=None):
     if pk:
         user = User.objects.get(pk=pk)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add</title>
+</head>
+<body>
+	<p><a href="{% url 'books:index' %}">Home</a></p>
+	<br/>
+	<form method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="hidden" name="next" value="{{ request.path }}">
+    	<button type="submit">Save</button>
+	</form>
+	<p></p>
+	<a href="{% url 'books:author_add' %}"">Add author</a>
+	<a href="{% url 'books:genre_add' %}"">Add genre</a>
+
+</body>
+</html>
