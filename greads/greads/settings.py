@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'books.apps.BooksConfig',
     'users.apps.UsersConfig',
     'accounts.apps.AccountsConfig',
+
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -53,11 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'greads.urls'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
 
 TEMPLATES = [
     {
@@ -126,10 +124,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+
 # URL to redirect the user upon a successful login
 LOGIN_REDIRECT_URL = 'home'
 # URL to redirect the user upon a successful logout
 LOGOUT_REDIRECT_URL = 'home'
-# Configuring email files
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")

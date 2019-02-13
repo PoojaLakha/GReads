@@ -31,3 +31,20 @@ h2{
 h5{
 	text-align: center
 }
+
+body {
+  background-image: url(../img/gravel.png);
+}
+
+.logo {
+  font-family: 'Peralta', cursive;
+}
+
+.logo a {
+  color: rgba(0,0,0,.9);
+}
+
+.logo a:hover,
+.logo a:active {
+  text-decoration: none;
+}
