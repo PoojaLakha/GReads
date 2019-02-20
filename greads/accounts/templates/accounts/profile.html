@@ -1,4 +1,4 @@
-{% extends "base_generic.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 <p>Last Name      : {{ user.last_name }}</p>
 <p>Email          : {{ user.email}}</p>
 
-<form action="{% url 'users:edit_profile' %}" method="GET">
+<form action="{% url 'accounts:edit_profile' %}" method="GET">
   {% csrf_token %}
   <input type="submit" value="Edit">
 </form>

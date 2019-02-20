@@ -1,15 +1,43 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Greads</li>
+{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-  {% block sidebar %}
-        <ul class="sidebar-nav">
-          <li><a href="{% url 'books:index' %}">Home</a></li>
-          <li><a href="{% url 'books:books' %}">All books</a></li>
-          <li><a href="{% url 'users:view_profile' %}">Profile</a></li>
-        </ul>
-  {% endblock %}
-  {% endif %}
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand-home">Search and browse books</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<br>
+      <div class="u-defaultType">
+          
+      <div class="left" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Art</a><br>
+
+                  <a class="gr-hyperlink" href="#">Biography</a><br>
+
+                  <a class="gr-hyperlink" href="#">Classics</a><br>
+
+                  <a class="gr-hyperlink" href="#">Fiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">Mystery</a><br>
+
+                  <a class="gr-hyperlink" href="#">Nonfiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">Poetry</a><br>
+
+                  <a class="gr-hyperlink" href="#">Romance</a><br>
+
+                  <a class="gr-hyperlink" href="#">Thriller</a><br>
+
+                  <a class="gr-hyperlink" href="#">Travel</a><br>
+
+      </div>
+
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% endblock %}
+
+{% block title %}Edit User Profile{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="text logo my-4">
+      Account settings
+    </h1>
+  		<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button type="submit">Save</button>
+    </form>
+    <br>
+	</div>
+  </div>
+{% endblock %}
