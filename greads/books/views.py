@@ -3,11 +3,30 @@ from django.views.generic.edit import UpdateView, DeleteView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Book, Author, Genre
 from .forms import BookForm, AuthorForm, GenreForm
 
 
 # Create your views here.
+
+def search(request):
+    template = 'books/search_book_list.html'
+    page = request.GET.get('page', 1)
+
+    query = request.GET['q']
+    search_list = Book.objects.filter(title__icontains=query)
+
+    paginator = Paginator(search_list, 5)
+    try:
+        search_list = paginator.page(page)
+    except PageNotAnInteger:
+        search_list = paginator.page(1)
+    except EmptyPage:
+        search_list = paginator.page(paginator.num_pages)
+
+    return render(request, template, {'search_list': search_list,
+                                      'query': query})
 
 
 def index(request):
@@ -27,12 +46,6 @@ def new_book(request):
         form = BookForm()
         # print("Else")
     return render(request, 'books/bookform.html', {'form': form})
-
-
-'''class BookCreate(CreateView):
-    model = Book
-    fields = '__all__'
-'''
 
 
 class BookUpdate(UpdateView):
@@ -59,21 +72,13 @@ class BookDelete(DeleteView):
 class BookListView(generic.ListView):
     model = Book
     template_name = 'books/book_list.html'
-
-    def get_queryset(self):
-        book_list = Book.objects.all()
-        return book_list
+    context_object_name = 'book_list'
+    paginate_by = 3
+    queryset = Book.objects.all()
 
 
 class BookDetailView(generic.DetailView):
     model = Book
-
-
-'''
-class BookUpdate(UpdateView):
-    model = Book
-    fields = '__all__'
-'''
 
 
 def new_author(request):
@@ -95,11 +100,6 @@ def new_author(request):
     return render(request, 'books/authorform.html', {'form': form})
 
 
-class AuthorUpdate(UpdateView):
-    model = Book
-    fields = '__all__'
-
-
 def AuthorConfirm(request, pk=Author.id):
     name = Author.objects.get(book_id=pk)
     book_id = pk
@@ -109,6 +109,11 @@ def AuthorConfirm(request, pk=Author.id):
     }
     return render(request, 'books/author_confirm_delete.html',
                   context)
+
+
+class AuthorUpdate(UpdateView):
+    model = Book
+    fields = '__all__'
 
 
 class AuthorDelete(DeleteView):
@@ -135,11 +140,6 @@ def new_genre(request):
     return render(request, 'books/genreform.html', {'form': form})
 
 
-class GenreUpdate(UpdateView):
-    model = Book
-    fields = '__all__'
-
-
 def GenreConfirm(request, pk=Genre.id):
     name = Genre.objects.get(book_id=pk)
     book_id = pk
@@ -149,6 +149,11 @@ def GenreConfirm(request, pk=Genre.id):
     }
     return render(request, 'books/genre_confirm_delete.html',
                   context)
+
+
+class GenreUpdate(UpdateView):
+    model = Book
+    fields = '__all__'
 
 
 class GenreDelete(DeleteView):

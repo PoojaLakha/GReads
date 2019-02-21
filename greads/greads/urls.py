@@ -21,6 +21,7 @@ from django.views.generic.base import TemplateView
 from accounts import views
 
 urlpatterns = [
+    url(r'^admin/', admin.site.urls),
     # signup
     url(r'^signup/$', views.signup, name='signup'),
 
@@ -62,5 +63,4 @@ urlpatterns = [
     url(r'^books/', include('books.urls')),
 
     url('', TemplateView.as_view(template_name='home.html'), name='home'),
-    url(r'^admin/', admin.site.urls),
 ]

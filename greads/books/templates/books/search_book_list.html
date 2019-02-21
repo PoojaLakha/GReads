@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Search List{% endblock %}
+
+{% block content %}
+{% if search_list %}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Book Title</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in search_list %}
+          <tr>
+            <td><a href="#">{{ book.title }}</a></td>
+            <td>{% for author in book.author.all %}<a href="#">{{ author }}</a> <br> {% endfor %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% else %}
+    <p>No books that contains your search word.</p>
+    <form action="{% url 'books:book_add' %}" method="get">
+      {% csrf_token %}
+      <input type="submit" value="Add it!">
+    </form>
+{% endif %}
+
+{% if search_list.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if search_list.has_previous %}
+    <li class="page-item"><a href="?page={{ search_list.previous_page_number }}{% if query %}&q={{query}}{% endif %}">Previous</a></li>
+    {% else %}
+      <li class="disabled"><span>Previous</span></li>
+    {% endif %}
+    <li class="page-item"><a class="page-link" href="?page={{ 1 }}{% if query %}&q={{query}}{% endif %}">1</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ 2 }}{% if query %}&q={{query}}{% endif %}">2</a></li>
+    <li class="page-item"><a class="page-link" href="?page={{ 3 }}{% if query %}&q={{query}}{% endif %}">3</a></li>
+    {% if search_list.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ search_list.next_page_number}}{% if query %}&q={{query}}{% endif %}">Next</a></l>
+        {% else %}
+      <li class="disabled"><span>Next</span></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+{% endblock %}
