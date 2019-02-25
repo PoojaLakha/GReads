@@ -44,7 +44,6 @@ def new_book(request):
                           {'books': books})
     else:
         form = BookForm()
-        # print("Else")
     return render(request, 'books/bookform.html', {'form': form})
 
 

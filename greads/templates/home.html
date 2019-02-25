@@ -6,25 +6,54 @@
 
 {% block content %}
 
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand-home">Search and browse books</a>
-  <form class="form-inline" method="GET" action="{% url 'books:search' %}">
-    <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
+      <h2>Search and browse books</h2>
+        <form class="form-inline" method="GET" action="{% url 'books:search' %}">
+          <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
 
-<br>
-      <div class="u-defaultType">
+      <br>
+    <div class="u-defaultType">
           
-      <div class="left" style="width: 25%">
+      <div class="column" style="width: 25%">
                   <a class="gr-hyperlink" href="#">Art</a><br>
 
                   <a class="gr-hyperlink" href="#">Biography</a><br>
 
+                  <a class="gr-hyperlink" href="#">Business</a><br>
+
+                  <a class="gr-hyperlink" href="#">Children's</a><br>
+
+                  <a class="gr-hyperlink" href="#">Christian</a><br>
+
                   <a class="gr-hyperlink" href="#">Classics</a><br>
 
+                  <a class="gr-hyperlink" href="#">Comics</a><br>
+
+                  <a class="gr-hyperlink" href="#">Cookbooks</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Ebooks</a><br>
+
+                  <a class="gr-hyperlink" href="#">Fantasy</a><br>
+
                   <a class="gr-hyperlink" href="#">Fiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">Graphic Novels</a><br>
+
+                  <a class="gr-hyperlink" href="#">Historical Fiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">History</a><br>
+
+                  <a class="gr-hyperlink" href="#">Horror</a><br>
+
+                  <a class="gr-hyperlink" href="#">Memoir</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Music</a><br>
 
                   <a class="gr-hyperlink" href="#">Mystery</a><br>
 
@@ -32,12 +61,29 @@
 
                   <a class="gr-hyperlink" href="#">Poetry</a><br>
 
+                  <a class="gr-hyperlink" href="#">Psychology</a><br>
+
                   <a class="gr-hyperlink" href="#">Romance</a><br>
+
+                  <a class="gr-hyperlink" href="#">Science</a><br>
+
+                  <a class="gr-hyperlink" href="#">Science Fiction</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Self Help</a><br>
+
+                  <a class="gr-hyperlink" href="#">Sports</a><br>
 
                   <a class="gr-hyperlink" href="#">Thriller</a><br>
 
                   <a class="gr-hyperlink" href="#">Travel</a><br>
 
-      </div>
+                  <a class="gr-hyperlink" href="#">Young Adult</a><br>
 
+                  <a class="gr-hyperlink" href="#">More genres</a>
+
+      </div>
+  </div>
+</div>
 {% endblock %}

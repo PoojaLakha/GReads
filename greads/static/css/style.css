@@ -1,21 +1,22 @@
 html, body {   
- width: 100%;   
-height: 100%;   
-font-family: "Helvetica Neue", Helvetica, sans-serif;   
-color: #444;   
--webkit-font-smoothing: antialiased;    background: #f0f0f0;
+    width: 100%;   
+    height: 100%;   
+    font-family: "Helvetica Neue", Helvetica, sans-serif;   
+    color: #444;   
+    -webkit-font-smoothing: antialiased;
+    background: #f0f0f0;
 }
 
 #container {
-position: fixed;
-text-align: center;
-width: 340px;
-height: 280px;
-top: 50%;
-left: 50%;
-margin-top: -140px;
-margin-left: -170px;
-	background: #fff;
+    position: fixed;
+    text-align: center;
+    width: 340px;
+    height: 280px;
+    top: 50%;
+    left: 50%;
+    margin-top: -140px;
+    margin-left: -170px;
+    background: #fff;
 }
 
 form {
@@ -24,27 +25,27 @@ form {
 }
 
 h2{
-	text-align: center;
-	font-family: "Times New Roman", Times, sans-serif;
+    text-align: center;
+    font-family: "Times New Roman", Times, sans-serif;
 }
 
 h5{
-	text-align: center
+    text-align: center
 }
 
 body {
-  background-image: url(../img/gravel.png);
+    background-image: url(../img/gravel.png);
 }
 
 .logo {
-  font-family: 'Peralta', cursive;
+    font-family: 'Peralta', cursive;
 }
 
 .logo a {
-  color: rgba(0,0,0,.9);
+    color: rgba(0,0,0,.9);
 }
 
 .logo a:hover,
 .logo a:active {
-  text-decoration: none;
+    text-decoration: none;
 }

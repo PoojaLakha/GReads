@@ -1,21 +1,32 @@
 {% extends 'base.html' %}
 
+
 {% block title %}Search List{% endblock %}
 
 {% block content %}
 {% if search_list %}
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Book Title</th>
-          <th>Author</th>
-        </tr>
-      </thead>
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" class="table table-border">
       <tbody>
         {% for book in search_list %}
           <tr>
-            <td><a href="#">{{ book.title }}</a></td>
-            <td>{% for author in book.author.all %}<a href="#">{{ author }}</a> <br> {% endfor %}</td>
+            <td width="5%" valign="top">
+              <div id="320" class="u-anchorTarget"></div>
+                <a href="#">image</a>
+             </td>
+             <td width="100%" valign="top">
+                <a class="bookTitle" itemprop="url" href="#">
+                  <span itemprop="name">{{book.title}}</span>
+                </a>
+                <br><span class="by">by</span>
+                  <span itemprop="author">
+                    <div class="authorName__container">
+                    {% for author in book.author.all %}
+                    <a class="authorName" itemprop="url" href="#"><span itemprop="name">{{author}}</span></a><br>
+                    {% endfor %}
+                    </div>
+                  </span>
+
+                <br>
           </tr>
         {% endfor %}
       </tbody>
