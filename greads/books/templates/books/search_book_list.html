@@ -12,6 +12,16 @@
             <td width="5%" valign="top">
               <div id="320" class="u-anchorTarget"></div>
                 <a href="#">image</a>
+                <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Book shelf
+                    </button>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Read</a>
+                    <a class="dropdown-item" href="#">Currently reading</a>
+                    <a class="dropdown-item" href="#">Want to read</a>
+                  </div>
+                </div>
              </td>
              <td width="100%" valign="top">
                 <a class="bookTitle" itemprop="url" href="#">
@@ -32,7 +42,7 @@
       </tbody>
     </table>
 {% else %}
-    <p>No books that contains your search word.</p>
+    <p>We have no book that contains your search word. Would you like to add one?</p>
     <form action="{% url 'books:book_add' %}" method="get">
       {% csrf_token %}
       <input type="submit" value="Add it!">

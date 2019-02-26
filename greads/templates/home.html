@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block breadcrumb %}
   <li class="breadcrumb-item active">Greads</li>
 {% endblock %}
@@ -14,6 +16,7 @@
       </nav>
 
       <br>
+<section id=genre-list>
     <div class="u-defaultType">
           
       <div class="column" style="width: 25%">
@@ -82,8 +85,61 @@
                   <a class="gr-hyperlink" href="#">Young Adult</a><br>
 
                   <a class="gr-hyperlink" href="#">More genres</a>
+                  <br>
+                  <br>
+                  <br>
 
       </div>
   </div>
-</div>
+  </section>
+  <br>
+  <br>
+  <section id="updates">
+    <div class="section-content">
+      <div class="container">
+        <h3>Want to add books to shelves?</h3>
+        <p class="lead"></p>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card-group">
+              <div class="card">
+                <div class="card-block">
+                  <h5 class="card-title">CURRENTLY READING</h5>
+                </div>
+                <div class="card-block">
+                  <p class="card-text">What are you reading?</p>
+                  <form class="form-inline" method="GET" action="{% url 'books:search' %}">
+                  <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-block">
+                  <h5 class="card-title">2019 READING CHALLENGE</h5>
+                </div>
+                <div class="card-block">
+                  <p class="card-text">Set your reading challenge this year</p>
+                  <button type="button" class="btn btn-outline-success" data-toggle="Modal" data-target="#MyModal">Save</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-block">
+                  <h5 class="card-title">WANT TO READ</h5>
+                </div>
+                <div class="card-block">
+                  <p class="card-text">What do you want to read next?</p>
+                  <form class="form-inline" method="GET" action="{% url 'books:search' %}">
+                  <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 {% endblock %}
