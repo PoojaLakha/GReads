@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'^book/results/$', views.search, name='search'),
     url(r'^genres/$', views.GenreListView.as_view(), name='genres'),
     url(r'^genres/results/$', views.genresearch, name='gsearch'),
-    url('', views.home, name='home'),
 ]
 
 urlpatterns += [

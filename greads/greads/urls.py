@@ -18,12 +18,13 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.urls import include
 from django.views.generic.base import TemplateView
-from accounts import views
+from accounts import views as accounts_views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+
     # signup
-    url(r'^signup/$', views.signup, name='signup'),
+    url(r'^signup/$', accounts_views.signup, name='signup'),
 
     # Login/logout
     url(r'^login/$', auth_views.LoginView.as_view(
@@ -62,5 +63,5 @@ urlpatterns = [
     # books url
     url(r'^books/', include('books.urls')),
 
-    url('', TemplateView.as_view(template_name='home.html'), name='home'),
+    url(r'^admin/', admin.site.urls),
 ]

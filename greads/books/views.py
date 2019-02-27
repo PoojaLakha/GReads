@@ -40,10 +40,6 @@ def genresearch(request):
                                       'query': query})
 
 
-def home(request):
-    return render(request, 'home.html')
-
-
 def new_book(request):
     if request.method == "POST":
         form = BookForm(request.POST)

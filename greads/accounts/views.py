@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -13,7 +13,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            auth_login(request, user)
             return redirect('home')
     else:
         form = SignUpForm()
@@ -21,7 +21,6 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-# Create your views here.
 def view_profile(request, pk=None):
     if pk:
         user = User.objects.get(pk=pk)
