@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Genre</li>
+{% endblock %}
+
+{% block content %}
+
+<h2>Search genre</h2>
+        <form class="form-inline" method="GET" action="{% url 'books:gsearch' %}">
+          <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Find genre</button>
+        </form>
+      </nav>
+
+      <br>
+
+      <section id=genre-list>
+    <div class="u-defaultType">
+          
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Art</a><br>
+
+                  <a class="gr-hyperlink" href="#">Biography</a><br>
+
+                  <a class="gr-hyperlink" href="#">Business</a><br>
+
+                  <a class="gr-hyperlink" href="#">Children's</a><br>
+
+                  <a class="gr-hyperlink" href="#">Christian</a><br>
+
+                  <a class="gr-hyperlink" href="#">Classics</a><br>
+
+                  <a class="gr-hyperlink" href="#">Comics</a><br>
+
+                  <a class="gr-hyperlink" href="#">Cookbooks</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Ebooks</a><br>
+
+                  <a class="gr-hyperlink" href="#">Fantasy</a><br>
+
+                  <a class="gr-hyperlink" href="#">Fiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">Graphic Novels</a><br>
+
+                  <a class="gr-hyperlink" href="#">Historical Fiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">History</a><br>
+
+                  <a class="gr-hyperlink" href="#">Horror</a><br>
+
+                  <a class="gr-hyperlink" href="#">Memoir</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Music</a><br>
+
+                  <a class="gr-hyperlink" href="#">Mystery</a><br>
+
+                  <a class="gr-hyperlink" href="#">Nonfiction</a><br>
+
+                  <a class="gr-hyperlink" href="#">Poetry</a><br>
+
+                  <a class="gr-hyperlink" href="#">Psychology</a><br>
+
+                  <a class="gr-hyperlink" href="#">Romance</a><br>
+
+                  <a class="gr-hyperlink" href="#">Science</a><br>
+
+                  <a class="gr-hyperlink" href="#">Science Fiction</a><br>
+
+      </div>
+      <div class="column" style="width: 25%">
+                  <a class="gr-hyperlink" href="#">Self Help</a><br>
+
+                  <a class="gr-hyperlink" href="#">Sports</a><br>
+
+                  <a class="gr-hyperlink" href="#">Thriller</a><br>
+
+                  <a class="gr-hyperlink" href="#">Travel</a><br>
+
+                  <a class="gr-hyperlink" href="#">Young Adult</a><br>
+
+                  <a class="gr-hyperlink" href="#">More genres</a>
+                  <br>
+                  <br>
+                  <br>
+
+      </div>
+  </div>
+  </section>
+
+<h4>Genres</h4>
+<br>
+<div class="bigBoxBody">
+  	<div class="bigBoxContent containerWithHeaderContent">
+          <div class="coverRow">
+            <div class="leftAlignedImage bookBox">
+				<div class="coverWrapper">
+				    <a href="#""><img alt="Book Image" title="" width="115" class="bookImage" src="#"></a>
+				</div>
+			</div>
+			<div class="leftAlignedImage bookBox">
+				<div class="coverWrapper">
+				    <a href="#""><img alt="Book Image" title="" width="115" class="bookImage" src="#"></a>
+				</div>
+			</div>
+			<div class="leftAlignedImage bookBox">
+				<div class="coverWrapper">
+				    <a href="#""><img alt="Book Image" title="" width="115" class="bookImage" src="#"></a>
+				</div>
+			</div>
+			<div class="leftAlignedImage bookBox">
+				<div class="coverWrapper">
+				    <a href="#""><img alt="Book Image" title="" width="115" class="bookImage" src="#"></a>
+				</div>
+			</div>
+			<div class="leftAlignedImage bookBox">
+				<div class="coverWrapper">
+				    <a href="#""><img alt="Book Image" title="" width="115" class="bookImage" src="#"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}

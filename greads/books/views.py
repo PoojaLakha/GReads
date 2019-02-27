@@ -1,5 +1,6 @@
 from django.views import generic
 from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic import ListView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
@@ -29,8 +30,18 @@ def search(request):
                                       'query': query})
 
 
-def index(request):
-    return render(request, 'books/index.html')
+def genresearch(request):
+    template = 'books/search_genre.html'
+
+    query = request.GET['q']
+    search_list = Book.objects.filter(genre__name__icontains=query).distinct()
+
+    return render(request, template, {'search_list': search_list,
+                                      'query': query})
+
+
+def home(request):
+    return render(request, 'home.html')
 
 
 def new_book(request):
@@ -158,3 +169,9 @@ class GenreUpdate(UpdateView):
 class GenreDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('books:books')
+
+
+class GenreListView(ListView):
+    model = Genre
+    context_object_name = 'genres'
+    template_name = 'genre_list.html'

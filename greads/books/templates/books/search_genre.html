@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Search Genre{% endblock %}
+
+{% block content %}
+{% if search_list %}
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" class="table table-border">
+      <tbody>
+        {% for book in search_list %}
+          <tr>
+            <td width="5%" valign="top">
+              <div id="320" class="u-anchorTarget"></div>
+                <a href="#">image</a>
+             </td>
+             <td width="100%" valign="top">
+                <a class="bookTitle" itemprop="url" href="#">
+                  <span itemprop="name">{{book.title}}</span>
+                </a>
+                <br><span class="by">by</span>
+                  <span itemprop="author">
+                    <div class="authorName__container">
+                    {% for author in book.author.all %}
+                    <a class="authorName" itemprop="url" href="#"><span itemprop="name">{{author}}</span></a><br>
+                    {% endfor %}
+                    </div>
+                  </span>
+
+                <br>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% else %}
+    <p>We have no book in that genre.</p>
+    <form action="{% url 'books:book_add' %}" method="get">
+      {% csrf_token %}
+      <input type="submit" value="Add it!">
+    </form>
+{% endif %}
+{% endblock %}
