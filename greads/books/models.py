@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .search import BookIndex
 from django.core.validators import URLValidator
 import uuid
 
@@ -41,6 +42,14 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def indexing(self):
+        obj = BookIndex(
+            meta={'_id': self.isbn},
+            title=self.title
+        )
+        obj.save()
+        return obj.to_dict(include_meta=True)
 
 
 class UserBook(models.Model):

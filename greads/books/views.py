@@ -7,9 +7,24 @@ from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Book, Author, Genre
 from .forms import BookForm, AuthorForm, GenreForm
+from .search import BookIndex
 
 
 # Create your views here.
+def es_search(request):
+    template = 'books/book_list.html'
+
+    query = request.GET.get('q')
+
+    if query:
+        s = BookIndex.search().query("match", title=query)
+        response = s.execute()
+        response_dict = response.to_dict()
+        hits = response_dict['hits']['hits']
+        titles = [hit['_source']['title'] for hit in hits]
+
+    return render(request, template, {'titles': titles})
+
 
 def search(request):
     template = 'books/search_book_list.html'
