@@ -13,17 +13,23 @@ from .search import BookIndex
 # Create your views here.
 def es_search(request):
     template = 'books/book_list.html'
+    tagHtml = False
 
-    query = request.GET.get('q')
+    if request.method == 'POST':
+        search_text = request.POST['search_text']
+    else:
+        search_text = ''
 
-    if query:
-        s = BookIndex.search().query("match", title=query)
-        response = s.execute()
-        response_dict = response.to_dict()
-        hits = response_dict['hits']['hits']
-        titles = [hit['_source']['title'] for hit in hits]
+    if len(search_text) > 0:
+        tagHtml = True
 
-    return render(request, template, {'titles': titles})
+    s = BookIndex.search().query("match", title=search_text)
+    response = s.execute()
+    response_dict = response.to_dict()
+    hits = response_dict['hits']['hits']
+    titles = [hit['_source']['title'] for hit in hits]
+
+    return render(request, template, {'titles': titles, 'tagHtml': tagHtml})
 
 
 def search(request):

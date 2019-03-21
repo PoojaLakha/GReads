@@ -9,11 +9,11 @@
 {% block content %}
 
       <h2>Search and browse books</h2>
-        <form class="form-inline" method="GET" action="{% url 'books:esearch' %}">
-          <input class="form-control mr-sm-2" id="q" name="q" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </nav>
+      {% csrf_token %}
+          <input class="form-control mr-sm-2" id="search" name="search" type="text" placeholder="Search" aria-label="Search">
+          <ul id="search-results">
+            
+          </ul>
 
       <br>
 <section id=genre-list>

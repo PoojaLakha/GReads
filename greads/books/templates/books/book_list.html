@@ -1,13 +1,10 @@
-{% extends 'base.html' %}
+{% if tagHtml %}
+	{% if titles %}
 
-
-{% block title %}Search List{% endblock %}
-
-{% block content %}
-  {% for title in titles %}
-      {{title}}
-      <br>
-          
-  {% endfor %}
-
-{% endblock %}
+    	{% for title in titles %}
+        	<li><a href="#">{{title}}</a></li>
+    	{% endfor %}
+	{% else %}
+		No results found
+  	{% endif %}
+{% endif %}
