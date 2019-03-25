@@ -1,11 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Book{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>add</title>
 </head>
 <body>
-	<p><a href="{% url 'books:index' %}">Home</a></p>
-	<br/>
 	<form method="post">
 		{% csrf_token %}
 		{{ form.as_p }}
@@ -18,3 +21,4 @@
 
 </body>
 </html>
+{% endblock %}

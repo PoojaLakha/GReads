@@ -11,16 +11,7 @@
           <tr>
             <td width="5%" valign="top">
               <div id="320" class="u-anchorTarget"></div>
-                <a href="#">image</a>
-                <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Book shelf
-                    </button>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Read</a>
-                    <a class="dropdown-item" href="#">Currently reading</a>
-                    <a class="dropdown-item" href="#">Want to read</a>
-                  </div>
+                <a href="#"><img src="{{ book.cover_picture.url }}" width="75"></a>
                 </div>
              </td>
              <td width="100%" valign="top">
@@ -35,7 +26,17 @@
                     {% endfor %}
                     </div>
                   </span>
-
+                  <div class="btn-group">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Book shelf
+                    </button>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Read</a>
+                    <a class="dropdown-item" href="#">Currently reading</a>
+                    <a class="dropdown-item" href="#">Want to read</a>
+                  </div>
+                  rating:
+                  Published:
                 <br>
           </tr>
         {% endfor %}
@@ -43,7 +44,7 @@
     </table>
 {% else %}
     <p>We have no book that contains your search word. Would you like to add one?</p>
-    <form action="{% url 'books:book_add' %}" method="get">
+    <form action="{% url 'books:add_book' %}" method="get">
       {% csrf_token %}
       <input type="submit" value="Add it!">
     </form>

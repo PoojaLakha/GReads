@@ -61,12 +61,13 @@ def genresearch(request):
                                       'query': query})
 
 
-def new_book(request):
+def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST)
         if form.is_valid():
             book = form.save(commit=False)
             book.save()
+            form.save_m2m()
             books = Book.objects.all()
             return render(request, 'books/book_list.html',
                           {'books': books})

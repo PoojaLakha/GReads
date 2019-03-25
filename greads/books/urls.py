@@ -15,7 +15,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    url('book/create/', views.new_book, name='book_add'),
+    url('book/create/', views.add_book, name='add_book'),
     url('book/<int:pk>/update/', views.BookUpdate.as_view(),
         name='book_update'),
     url('book/<int:pk>/confirm/', views.BookConfirm,

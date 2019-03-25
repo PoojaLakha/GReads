@@ -19,6 +19,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import include
 from django.views.generic.base import TemplateView
 from accounts import views as accounts_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
@@ -64,4 +66,4 @@ urlpatterns = [
     url(r'^books/', include('books.urls')),
 
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -35,8 +35,8 @@ class Book(models.Model):
     genre = models.ManyToManyField(Genre)
     summary = models.TextField(max_length=3000)
     # published_year = models.DateField()
-    # cover_picture = models.ImageField(upload_to='pic_path',
-    #                                   default='pic_path_for_default_pic')
+    cover_picture = models.ImageField(upload_to='cover_pic',
+                                      blank=True)
     # publisher = models.CharField(max_length=100)
     # no_of_pages = models.IntegerField()
 

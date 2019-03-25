@@ -129,6 +129,10 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'greads/media/')
+
 # URL to redirect the user upon a successful login
 LOGIN_REDIRECT_URL = 'home'
 # URL to redirect the user upon a successful logout

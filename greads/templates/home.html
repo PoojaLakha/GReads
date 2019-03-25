@@ -8,18 +8,20 @@
 
 {% block content %}
 
-      <h2>Search and browse books</h2>
+<div class="leftContainer">
+    <div id="browsebox">
+      <h3>Search and browse books</h3>
+      <div id="searchbox">
+
       {% csrf_token %}
           <input class="form-control mr-sm-2" id="search" name="search" type="text" placeholder="Search" aria-label="Search">
           <ul id="search-results">
             
           </ul>
-
-      <br>
-<section id=genre-list>
-    <div class="u-defaultType">
-          
-      <div class="column" style="width: 25%">
+          <br>
+      
+      <div class="u-defaultType">
+      <div class="columnLeft" style="width: 25%">
                   <a class="gr-hyperlink" href="#">Art</a><br>
 
                   <a class="gr-hyperlink" href="#">Biography</a><br>
@@ -37,7 +39,7 @@
                   <a class="gr-hyperlink" href="#">Cookbooks</a><br>
 
       </div>
-      <div class="column" style="width: 25%">
+      <div class="columnLeft" style="width: 25%">
                   <a class="gr-hyperlink" href="#">Ebooks</a><br>
 
                   <a class="gr-hyperlink" href="#">Fantasy</a><br>
@@ -55,7 +57,7 @@
                   <a class="gr-hyperlink" href="#">Memoir</a><br>
 
       </div>
-      <div class="column" style="width: 25%">
+      <div class="columnLeft" style="width: 25%">
                   <a class="gr-hyperlink" href="#">Music</a><br>
 
                   <a class="gr-hyperlink" href="#">Mystery</a><br>
@@ -73,7 +75,7 @@
                   <a class="gr-hyperlink" href="#">Science Fiction</a><br>
 
       </div>
-      <div class="column" style="width: 25%">
+      <div class="columnLeft" style="width: 25%">
                   <a class="gr-hyperlink" href="#">Self Help</a><br>
 
                   <a class="gr-hyperlink" href="#">Sports</a><br>
@@ -91,7 +93,8 @@
 
       </div>
   </div>
-  </section>
+  </div>
+  </div>
   <br>
   <br>
   <section id="updates">
