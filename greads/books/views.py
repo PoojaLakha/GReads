@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import ListView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -63,16 +63,15 @@ def genresearch(request):
 
 def add_book(request):
     if request.method == "POST":
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             book = form.save(commit=False)
             book.save()
             form.save_m2m()
-            books = Book.objects.all()
-            return render(request, 'books/book_list.html',
-                          {'books': books})
+            return redirect('home')
     else:
         form = BookForm()
+
     return render(request, 'books/bookform.html', {'form': form})
 
 
