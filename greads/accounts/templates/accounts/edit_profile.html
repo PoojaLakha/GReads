@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% endblock %}
+
+{% block title %}Edit User Profile{% endblock %}
 
 {% block content %}
-
-<div class="container">
+  <div class="container">
+    <h2 class="text logo my-4">
+      Account settings
+    </h1>
+  		<div class="container">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        {% include 'includes/form.html' %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Save</button>
     </form>
     <br>
-</div>
-
+	</div>
+  </div>
 {% endblock %}
