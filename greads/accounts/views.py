@@ -1,12 +1,9 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.urls import reverse
 
 from .forms import UserForm, ProfileForm
-
 from .forms import SignUpForm
 
 

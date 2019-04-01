@@ -22,6 +22,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'kzd)gop%*&j+*%e8r5y2_7&7%6isl-_1sh_v!43_l)56&d#+=b'
 
+# Celery settings
+
+CELERY_BROKER_URL = 'amqp://lakha:pooja123@localhost:5672/djhost'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -42,6 +53,7 @@ INSTALLED_APPS = [
     'accounts',
 
     'widget_tweaks',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +153,5 @@ LOGOUT_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

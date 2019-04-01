@@ -1,8 +1,9 @@
-from django.db import models
 from django.contrib.auth.models import User
-from .search import BookIndex
 from django.core.validators import URLValidator
+from django.db import models
 import uuid
+
+from .search import BookIndex
 
 
 # Create your models here.
@@ -33,7 +34,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ManyToManyField(Author)
     genre = models.ManyToManyField(Genre)
-    summary = models.TextField(max_length=3000)
+    summary = models.TextField(max_length=3000, blank=True)
     # published_year = models.DateField()
     cover_picture = models.ImageField(upload_to='cover_pic',
                                       blank=True)

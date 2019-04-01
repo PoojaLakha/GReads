@@ -1,19 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Author{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>add author</title>
 </head>
 <body>
-	<p><a href="{% url 'books:index' %}">Home</a></p>
 	<br/>
 	<form method="post">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="hidden" name="next" value="{{ request.path }}">
+		{{ form|crispy }}
     	<button type="submit">Save</button>
 	</form>
 	<br/>
-	<a href="{% url 'books:book_add' %}">Go to my form!</a>
 
 </body>
 </html>
+{% endblock %}

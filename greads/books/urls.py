@@ -1,5 +1,5 @@
 from django.conf.urls import url
-# from django.views.generic.base import TemplateView
+
 from . import views
 
 app_name = 'books'
@@ -25,7 +25,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url('author/add/', views.new_author, name='author_add'),
+    url('author/add/', views.add_author, name='add_author'),
     url('author/<int:pk>/update/', views.AuthorUpdate.as_view(),
         name='author_update'),
     url('author/<int:pk>/confirm/', views.AuthorConfirm,

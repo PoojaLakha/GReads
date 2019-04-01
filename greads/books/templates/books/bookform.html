@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %}Add Book{% endblock %}
 
@@ -11,11 +12,11 @@
 <body>
 	<form method="post" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ form.as_p }}
+		{{ form|crispy }}
     	<button type="submit">Save</button>
 	</form>
 	<p></p>
-	<a href="{% url 'books:author_add' %}"">Add author</a>
+	<a href="{% url 'books:add_author' %}"">Add author</a>
 	<a href="{% url 'books:genre_add' %}"">Add genre</a>
 
 </body>

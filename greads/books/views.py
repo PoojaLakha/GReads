@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import Book, Author, Genre
 from .forms import BookForm, AuthorForm, GenreForm
 from .search import BookIndex
@@ -38,6 +39,7 @@ def search(request):
 
     query = request.GET['q']
     search_list = Book.objects.filter(title__icontains=query)
+    search_list1 = Book.objects.filter(title__icontains=query).values('cover_picture')
 
     paginator = Paginator(search_list, 5)
     try:
@@ -48,7 +50,7 @@ def search(request):
         search_list = paginator.page(paginator.num_pages)
 
     return render(request, template, {'search_list': search_list,
-                                      'query': query})
+                                      'query': query, 'searchlist1': search_list1})
 
 
 def genresearch(request):
@@ -108,17 +110,13 @@ class BookDetailView(generic.DetailView):
     model = Book
 
 
-def new_author(request):
+def add_author(request):
     if request.method == "POST":
         form = AuthorForm(request.POST)
         if form.is_valid():
-            author = form.save(commit=False)
+            author = form.save()
             author.save()
-            # authors = Author.objects.all()
-            # return render(request, 'books/bookform.html',
-            #               {'authors': authors})
-            next = request.POST.get('next', '/')
-            return HttpResponseRedirect(next)
+            return redirect('books:add_book')
     else:
         form = AuthorForm()
         # print("Else")

@@ -1,8 +1,11 @@
-import os, base64, re, logging
+import os
+import re
+import logging
+from elasticsearch import Elasticsearch
 from elasticsearch_dsl import DocType, Text
 from elasticsearch_dsl.connections import connections
-from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
+
 from . import models
 
 # Log transport details (optional):

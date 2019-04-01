@@ -10,9 +10,13 @@
         {% for book in search_list %}
           <tr>
             <td width="5%" valign="top">
-              <div id="320" class="u-anchorTarget"></div>
-                <a href="#"><img src="{{ book.cover_picture.url }}" width="75"></a>
-                </div>
+              <div id="320" class="u-anchorTarget">
+              {% if 'https' in book.cover_picture|stringformat:"s" %}
+                    <a href="#"><img src="{{ book.cover_picture }}" width="75"></a>
+                {% else %}
+                    <a href="#"><img src="{{ book.cover_picture.url }}" width="75"></a>
+                {% endif %}
+              </div>
              </td>
              <td width="100%" valign="top">
                 <a class="bookTitle" itemprop="url" href="#">
@@ -28,15 +32,17 @@
                   </span>
                   <div class="btn-group">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Book shelf
+                    Book shelf
                     </button>
                     <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Read</a>
                     <a class="dropdown-item" href="#">Currently reading</a>
                     <a class="dropdown-item" href="#">Want to read</a>
+                    </div>
                   </div>
-                  rating:
-                  Published:
+                  <br>
+                  avg rating:
+                  published:
                 <br>
           </tr>
         {% endfor %}
