@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Book, Author, Genre
 from .forms import BookForm, AuthorForm, GenreForm
 from .search import BookIndex
+from .tasks import update_book_cover_summary
 
 
 # Create your views here.
@@ -67,9 +68,11 @@ def add_book(request):
     if request.method == "POST":
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
+            form_isbn = form.cleaned_data['isbn']
             book = form.save(commit=False)
             book.save()
             form.save_m2m()
+            update_book_cover_summary.delay(form_isbn)
             return redirect('home')
     else:
         form = BookForm()
