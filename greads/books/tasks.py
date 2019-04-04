@@ -1,13 +1,15 @@
-# Create your tasks here
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from celery import Celery
 import requests
+import os
 from xml.etree import ElementTree
 
-app = Celery('tasks', broker='amqp://lakha:pooja123@localhost:5672/djhost')
+cloudamqp_url = os.environ.get('CLOUDAMQP_URL')
+app = Celery('tasks', broker=cloudamqp_url)
 
 
+# Create your tasks here
 @shared_task
 def add(x, y):
     return x + y
@@ -17,7 +19,7 @@ def add(x, y):
 def update_book_cover_summary(f_isbn):
     from .models import Book
     isbn = f_isbn
-    key = 'xXmFRqAwrnJKqDaOPBT2A'
+    key = os.environ.get('GOODREADS_KEY')
     response = requests.get("https://www.goodreads.com/book/isbn/" + isbn + "?key=" + key)
     tree = ElementTree.fromstring(response.content)
     book_update = Book.objects.get(isbn=isbn)

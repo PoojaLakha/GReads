@@ -24,10 +24,17 @@ SECRET_KEY = 'kzd)gop%*&j+*%e8r5y2_7&7%6isl-_1sh_v!43_l)56&d#+=b'
 
 # Celery settings
 
-CELERY_BROKER_URL = 'amqp://lakha:pooja123@localhost:5672/djhost'
+CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
 
 #: Only add pickle to this list if your broker is secured
 #: from unwanted access (see userguide/security.html)
+CELERY_Broker_POOL_LIMIT = 1
+CELERY_BROKER_HEARTBEAT = None
+CELERY_BROKER_CONNECTION_TIMEOUT = 30
+CELERY_RESULT_BACKEND = None
+CELERY_EVENT_QUEUE_EXPIRES = 60
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_WORKER_CONCURRENCY = 50
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
