@@ -2,13 +2,21 @@
 
 {% block content %}
 
-<h1>Book Details</h1>
+{% if 'https' in book.cover_picture|stringformat:"s" %}
+    <a href="#"><img src="{{ book.cover_picture }}" width="75"></a>
+{% else %}
+    <a href="#"><img src="{{ book.cover_picture.url }}" width="75"></a>
+{% endif %}
 
-<p>{{ book.title }}</p>
+<h3>{{ book.title }}</h3>
+by
+{% for author in book.author.all %}
+    <a href="#">{{author}}</span></a><br>
+{% endfor %}
+<br>
+<p>{{ book.summary }}</p>
 
-<p>{{ book.summary }} </p>
-
-<form action="{% url 'books:book_delete_confirm' pk=book.isbn %}" method="POST">
+<form action="{% url 'books:book_delete_confirm' %}" method="POST">
   {% csrf_token %}
   <input type="submit" value="Delete">
 </form>

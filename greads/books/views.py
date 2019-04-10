@@ -1,9 +1,9 @@
 from django.views import generic
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Book, Author, Genre
@@ -40,7 +40,6 @@ def search(request):
 
     query = request.GET['q']
     search_list = Book.objects.filter(title__icontains=query)
-    search_list1 = Book.objects.filter(title__icontains=query).values('cover_picture')
 
     paginator = Paginator(search_list, 5)
     try:
@@ -51,7 +50,7 @@ def search(request):
         search_list = paginator.page(paginator.num_pages)
 
     return render(request, template, {'search_list': search_list,
-                                      'query': query, 'searchlist1': search_list1})
+                                      'query': query})
 
 
 def genresearch(request):
@@ -109,8 +108,14 @@ class BookListView(generic.ListView):
     queryset = Book.objects.all()
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(DetailView):
     model = Book
+    template_name = 'books/book_detail.html'
+
+    def get_book_details(self, **kwargs):
+        pk = self.kwargs['pk']
+        context = Book.objects.get(isbn=pk)
+        return context
 
 
 def add_author(request):
@@ -122,8 +127,6 @@ def add_author(request):
             return redirect('books:add_book')
     else:
         form = AuthorForm()
-        # print("Else")
-    # return HttpResponseRedirect(next)
 
     return render(request, 'books/authorform.html', {'form': form})
 
@@ -149,21 +152,15 @@ class AuthorDelete(DeleteView):
     success_url = reverse_lazy('books:books')
 
 
-def new_genre(request):
+def add_genre(request):
     if request.method == "POST":
         form = GenreForm(request.POST)
         if form.is_valid():
-            genre = form.save(commit=False)
+            genre = form.save()
             genre.save()
-            # authors = Author.objects.all()
-            # return render(request, 'books/bookform.html',
-            #               {'authors': authors})
-            next = request.POST.get('next', '/')
-            return HttpResponseRedirect(next)
+            return redirect('books:add_book')
     else:
         form = GenreForm()
-        # print("Else")
-    # return HttpResponseRedirect(next)
 
     return render(request, 'books/genreform.html', {'form': form})
 

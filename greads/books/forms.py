@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset
 
-from .models import Book, Author, Genre
+from .models import Book, Author, Genre, UserBook
 
 
 class BookForm(ModelForm):
@@ -34,7 +34,6 @@ class AuthorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # make summary and cover_picture optional fields
         self.fields['website'].required = False
         self.fields['twitter_id'].required = False
         self.fields['email_id'].required = False
@@ -64,10 +63,26 @@ class GenreForm(ModelForm):
         self.helper.layout = Layout(
             Fieldset(
                 'name',
-                'deacription'
+                'description'
             )
         )
 
     class Meta:
         model = Genre
         fields = "__all__"
+
+
+class UserBookForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'shelf'
+            )
+        )
+
+    class Meta:
+        model = UserBook
+        fields = ['shelf']

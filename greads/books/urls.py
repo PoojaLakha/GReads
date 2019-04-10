@@ -6,10 +6,10 @@ app_name = 'books'
 
 urlpatterns = [
     url(r'^book/$', views.BookListView.as_view(), name='books'),
-    url(r'^book/<int:pk>', views.BookDetailView.as_view(),
-        name='book-detail'),
     url(r'^search/$', views.es_search, name='esearch'),
     url(r'^book/results/$', views.search, name='search'),
+    url(r'^book/show/(?P<pk>\d+)/$', views.BookDetailView.as_view(),
+        name='book-detail'),
     url(r'^genres/$', views.GenreListView.as_view(), name='genres'),
     url(r'^genres/results/$', views.genresearch, name='gsearch'),
 ]
@@ -35,7 +35,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url('genre/add/', views.new_genre, name='genre_add'),
+    url('genre/add/', views.add_genre, name='add_genre'),
     url('genre/<int:pk>/update/', views.GenreUpdate.as_view(),
         name='genre_update'),
     url('genre/<int:pk>/confirm/', views.GenreConfirm,

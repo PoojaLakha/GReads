@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Genre{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add genre</title>
+</head>
+<body>
+	<br/>
+	<form method="post">
+		{% csrf_token %}
+		{{ form|crispy }}
+    	<button type="submit">Save</button>
+	</form>
+	<br/>
+
+</body>
+</html>
+{% endblock %}

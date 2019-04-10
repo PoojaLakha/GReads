@@ -19,7 +19,7 @@
               </div>
              </td>
              <td width="100%" valign="top">
-                <a class="bookTitle" itemprop="url" href="#">
+                <a class="bookTitle" itemprop="url" href="{% url 'books:book-detail' pk=book.isbn %}">
                   <span itemprop="name">{{book.title}}</span>
                 </a>
                 <br><span class="by">by</span>
@@ -30,20 +30,6 @@
                     {% endfor %}
                     </div>
                   </span>
-                  <div class="btn-group">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Book shelf
-                    </button>
-                    <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Read</a>
-                    <a class="dropdown-item" href="#">Currently reading</a>
-                    <a class="dropdown-item" href="#">Want to read</a>
-                    </div>
-                  </div>
-                  <br>
-                  avg rating:
-                  published:
-                <br>
           </tr>
         {% endfor %}
       </tbody>
