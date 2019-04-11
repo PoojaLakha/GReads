@@ -76,4 +76,4 @@ class UserBook(models.Model):
         unique_together = (('book', 'reader'),)
 
     def __str__(self):
-        return '%s %s' % (self.id, self.book.title)
+        return '%s %s' % (self.book.title)

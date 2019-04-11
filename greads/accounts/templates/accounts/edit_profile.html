@@ -6,22 +6,22 @@
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
 {% endblock %}
 
-{% block title %}Edit User Profile{% endblock %}
+{% block title %}Update User Profile{% endblock %}
 
 {% block content %}
   <div class="container">
     <h2 class="text logo my-4">
       Account settings
     </h1>
-  		<div class="container">
-    <form method="post">
+  	<div class="container">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'includes/form.html' %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Save</button>
+        {{ update_user_form.as_p }}
+        {{ update_profile_form.as_p }}
+        <br />
+        <button type="submit"> Save </button>
     </form>
     <br>
 	</div>
-  </div>
 {% endblock %}

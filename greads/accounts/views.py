@@ -1,5 +1,6 @@
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -29,19 +30,28 @@ def view_profile(request, pk=None):
     return render(request, 'accounts/profile.html', args)
 
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
+        update_user_form = UserForm(request.POST, instance=request.user)
+        update_profile_form = ProfileForm(request.POST,
+                                          instance=request.user.profile)
+        if update_user_form.is_valid() and update_profile_form.is_valid():
+            user = update_user_form.save()
+            profile = update_profile_form.save(commit=False)
+            profile.user = user
+
+            if 'avatar' in request.FILES:
+                profile.avatar = request.FILES['avatar']
+
+            profile.save()
+
             return redirect('accounts:view_profile')
     else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+        update_user_form = UserForm(instance=request.user)
+        update_profile_form = ProfileForm(instance=request.user.profile)
 
     return render(request, 'accounts/edit_profile.html', {
-        'user_form': user_form,
-        'profile_form': profile_form
+        'update_user_form': update_user_form,
+        'update_profile_form': update_profile_form
     })
