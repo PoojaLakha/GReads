@@ -1,10 +1,9 @@
 {% if tagHtml %}
-	{% if titles %}
-
-    	{% for title in titles %}
-        	<li><a href="#">{{title}}</a></li>
-    	{% endfor %}
+	{% if length > 0 %}
+		{% for title,book_id in book_list %}
+        	<li><a href="{% url 'books:book-detail' book_id %}">{{title}}</a></li>
+		{% endfor %}
 	{% else %}
 		No results found
-  	{% endif %}
+	{% endif %}
 {% endif %}

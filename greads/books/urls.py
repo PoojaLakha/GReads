@@ -26,6 +26,8 @@ urlpatterns += [
 
 urlpatterns += [
     url('author/add/', views.add_author, name='add_author'),
+    url(r'^author/show/(?P<pk>\d+)/$', views.AuthorDetailView.as_view(),
+        name='author-detail'),
     url('author/<int:pk>/update/', views.AuthorUpdate.as_view(),
         name='author_update'),
     url('author/<int:pk>/confirm/', views.AuthorConfirm,

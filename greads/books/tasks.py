@@ -11,11 +11,6 @@ app = Celery('tasks', broker=cloudamqp_url)
 
 # Create your tasks here
 @shared_task
-def add(x, y):
-    return x + y
-
-
-@shared_task
 def update_book_cover_summary(f_isbn):
     from .models import Book
     isbn = f_isbn

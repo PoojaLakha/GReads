@@ -26,7 +26,7 @@
                   <span itemprop="author">
                     <div class="authorName__container">
                     {% for author in book.author.all %}
-                    <a class="authorName" itemprop="url" href="#"><span itemprop="name">{{author}}</span></a><br>
+                    <a class="authorName" itemprop="url" href="{% url 'books:author-detail' pk=author.id %}"><span itemprop="name">{{author}}</span></a><br>
                     {% endfor %}
                     </div>
                   </span>

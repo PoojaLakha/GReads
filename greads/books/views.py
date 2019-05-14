@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.views import generic
-from django.views.generic.edit import UpdateView, DeleteView
+from django.views.generic.edit import UpdateView, DeleteView, FormView
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .models import Book, Author, Genre
-from .forms import BookForm, AuthorForm, GenreForm
+
+from .models import Book, Author, Genre, UserBook
+from .forms import BookForm, AuthorForm, GenreForm, UserBookForm
 from .search import BookIndex
 from .tasks import update_book_cover_summary
 
@@ -30,8 +33,14 @@ def es_search(request):
     response_dict = response.to_dict()
     hits = response_dict['hits']['hits']
     titles = [hit['_source']['title'] for hit in hits]
+    book_id = [hit['_id'] for hit in hits]
 
-    return render(request, template, {'titles': titles, 'tagHtml': tagHtml})
+    book_list = zip(titles, book_id)
+    length = len(titles)
+
+    return render(request, template, {'book_list': book_list,
+                                      'length': length,
+                                      'tagHtml': tagHtml})
 
 
 def search(request):
@@ -82,6 +91,12 @@ def add_book(request):
 class BookUpdate(UpdateView):
     model = Book
     fields = '__all__'
+    template_name_suffix = '_update_form'
+
+
+class BookDelete(DeleteView):
+    model = Book
+    success_url = reverse_lazy('books:books')
 
 
 def BookConfirm(request, pk=Book.isbn):
@@ -95,11 +110,6 @@ def BookConfirm(request, pk=Book.isbn):
                   context)
 
 
-class BookDelete(DeleteView):
-    model = Book
-    success_url = reverse_lazy('books:books')
-
-
 class BookListView(generic.ListView):
     model = Book
     template_name = 'books/book_list.html'
@@ -110,11 +120,14 @@ class BookListView(generic.ListView):
 
 class BookDetailView(DetailView):
     model = Book
+    context_object_name = 'book'
+    pk_url_kwarg = 'pk'
     template_name = 'books/book_detail.html'
 
-    def get_book_details(self, **kwargs):
-        pk = self.kwargs['pk']
-        context = Book.objects.get(isbn=pk)
+    def get_context_data(self, **kwargs):
+        context = super(BookDetailView, self).get_context_data(**kwargs)
+        context['userbook'] = UserBook.objects.filter(user_book=self.object)
+        context['user'] = self.request.user
         return context
 
 
@@ -129,6 +142,15 @@ def add_author(request):
         form = AuthorForm()
 
     return render(request, 'books/authorform.html', {'form': form})
+
+
+class AuthorDetailView(DetailView):
+    model = Author
+    template_name = 'books/author_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 def AuthorConfirm(request, pk=Author.id):

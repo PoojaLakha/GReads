@@ -52,28 +52,25 @@ class Book(models.Model):
         return obj.to_dict(include_meta=True)
 
 
+SHELF_CHOICE = (
+    ('none', 'Not added to shelf'),
+    ('read', 'Read'),
+    ('want to read', 'Want to read'),
+    ('currently reading', 'currently reading'),
+)
+
+
 class UserBook(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
+    user_book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
     reader = models.ForeignKey(User, on_delete=models.SET_NULL,
                                null=True)
-
-    BOOK_SHELF = (
-        ('n', 'none'),
-        ('c', 'Currently reading'),
-        ('r', 'Read'),
-        ('w', 'want to read'),
-    )
-
-    shelf = models.CharField(
-        max_length=1,
-        choices=BOOK_SHELF,
-        blank=False,
-        default='n',
-        help_text='Book shelf',
-    )
+    shelf = models.CharField(max_length=100, choices=SHELF_CHOICE,
+                             default='none')
+    total_books = models.PositiveIntegerField(default=0)
+    modified_on = models.DateField()
 
     class Meta:
-        unique_together = (('book', 'reader'),)
+        unique_together = (("user_book", "reader"),)
 
     def __str__(self):
-        return '%s %s' % (self.book.title)
+        return '{0}'.format(self.user_book)

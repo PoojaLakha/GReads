@@ -8,14 +8,27 @@
     <a href="#"><img src="{{ book.cover_picture.url }}" width="75"></a>
 {% endif %}
 
+<br>
+
 <h3>{{ book.title }}</h3>
 by
 {% for author in book.author.all %}
-    <a href="#">{{author}}</span></a><br>
+    <a href="{% url 'books:author-detail' pk=author.id %}">{{author}}</span></a><br>
 {% endfor %}
+
 <br>
 <p>{{ book.summary }}</p>
 
+{% for copy in book.userbook_set.all %}
+	{% if copy.reader == user %}
+      <hr>
+      {% if copy.shelf != 'none' %}
+        <p><strong>Book added to shelf:</strong> {{copy.shelf}}</p>
+      {% endif %}
+      {% endif %}
+{% endfor %}
+
+<br>
 <form action="{% url 'books:book_delete_confirm' %}" method="POST">
   {% csrf_token %}
   <input type="submit" value="Delete">

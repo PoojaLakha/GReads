@@ -30,6 +30,22 @@ class BookForm(ModelForm):
         fields = "__all__"
 
 
+class UserBookForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'shelf'
+            )
+        )
+
+    class Meta:
+        model = UserBook
+        fields = "__all__"
+
+
 class AuthorForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,19 +86,3 @@ class GenreForm(ModelForm):
     class Meta:
         model = Genre
         fields = "__all__"
-
-
-class UserBookForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Fieldset(
-                'shelf'
-            )
-        )
-
-    class Meta:
-        model = UserBook
-        fields = ['shelf']

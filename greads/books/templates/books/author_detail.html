@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>{{ author.first_name }}</h3> <h3>{{ author.last_name }}</h3>
+
+<br>
+<p>Website : {{ author.website }}</p>
+<p>Twitter : {{ author.twitter_id }}</p>
+<p>Email   : {{ author.email_id }}</p>
+
+<br>
+<h3>About</h3>
+<p>{{ author.about }}</p>
+
+
+{% endblock%}
