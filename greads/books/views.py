@@ -3,7 +3,7 @@ from django.views import generic
 from django.views.generic.edit import UpdateView, DeleteView, FormView
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -212,3 +212,9 @@ class GenreListView(ListView):
     model = Genre
     context_object_name = 'genres'
     template_name = 'genre_list.html'
+
+
+def get_genre(request, name):
+    genre = get_object_or_404(Genre, name=name)
+
+    return render(request, 'books/genre_detail.html', {'genre': genre})

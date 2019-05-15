@@ -38,6 +38,8 @@ urlpatterns += [
 
 urlpatterns += [
     url('genre/add/', views.add_genre, name='add_genre'),
+    url(r'^genre/show/(?P<name>[\w\s-]+)/$', views.get_genre,
+        name='genre-detail'),
     url('genre/<int:pk>/update/', views.GenreUpdate.as_view(),
         name='genre_update'),
     url('genre/<int:pk>/confirm/', views.GenreConfirm,
